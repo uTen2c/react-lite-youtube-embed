@@ -34,8 +34,8 @@ export default function LiteYouTubeEmbed(props: LiteYouTube) {
   const posterImp = props.poster || "hqdefault";
   const paramsImp = `&${props.params}` || "";
   const posterUrl = !props.playlist ?
-    `https://i.ytimg.com/vi/${videoId}/${posterImp}.jpg`:
-    `https://i.ytimg.com/vi/${videoPlaylisCovertId}/${posterImp}.jpg`;
+    `https://img.youtube.com/vi_webp/${videoId}/${posterImp}.webp`:
+    `https://img.youtube.com/vi_webp/${videoPlaylisCovertId}/${posterImp}.webp`;
   let ytUrl = props.noCookie
     ? "https://www.youtube-nocookie.com"
     : "https://www.youtube.com";

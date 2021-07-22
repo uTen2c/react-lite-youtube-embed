@@ -1,6 +1,5 @@
-
-    /**
-* react-lite-youtube-embed v1.1.54
+/**
+* react-lite-youtube-embed v2.0.3
 *  https://github.com/ibrahimcesar/react-lite-youtube-embed.git
 *
 *  Copyright (c) Ibrahim Cesar < email@ibrahimcesar.com > and project contributors.
@@ -22,11 +21,14 @@ function LiteYouTubeEmbed(props) {
     var posterImp = props.poster || "hqdefault";
     var paramsImp = "&" + props.params || "";
     var posterUrl = !props.playlist ?
-        "https://i.ytimg.com/vi/" + videoId + "/" + posterImp + ".jpg" :
-        "https://i.ytimg.com/vi/" + videoPlaylisCovertId + "/" + posterImp + ".jpg";
+        "https://img.youtube.com/vi_webp/" + videoId + "/" + posterImp + ".webp" :
+        "https://img.youtube.com/vi_webp/" + videoPlaylisCovertId + "/" + posterImp + ".webp";
     var ytUrl = props.noCookie
         ? "https://www.youtube-nocookie.com"
         : "https://www.youtube.com";
+    ytUrl = props.cookie
+        ? "https://www.youtube.com"
+        : "https://www.youtube-nocookie.com";
     var iframeSrc = !props.playlist
         ? ytUrl + "/embed/" + videoId + "?autoplay=1" + paramsImp
         : ytUrl + "/embed/videoseries?autoplay=1&list=" + videoId + paramsImp;
@@ -35,6 +37,7 @@ function LiteYouTubeEmbed(props) {
     var iframeClassImp = props.iframeClass || "";
     var playerClassImp = props.playerClass || "lty-playbtn";
     var wrapperClassImp = props.wrapperClass || "yt-lite";
+    var onIframeAdded = props.onIframeAdded || function () { };
     var warmConnections = function () {
         if (preconnected)
             return;
@@ -43,6 +46,7 @@ function LiteYouTubeEmbed(props) {
     var addIframe = function () {
         if (iframe)
             return;
+        onIframeAdded();
         setIframe(true);
     };
     return (React.createElement(React.Fragment, null,
